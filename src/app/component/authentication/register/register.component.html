@@ -1,0 +1,86 @@
+<!-- Main navigation -->
+<header>
+
+    <!-- Full Page Intro -->
+    <div id="register" class="view">
+        <!-- Mask & flexbox options-->
+        <div class="mask">
+            <!-- Content -->
+            <div class="container h-100">
+                <!--Section: Content-->
+                <section class="p-5 my-md-5 text-center">
+
+                    <form class="my-3 mx-md-5" action="">
+
+                        <div class="row">
+                            <div class="col-md-6 mx-auto">
+                                <!-- Material form login -->
+                                <div class="card">
+
+                                    <!--Card content-->
+                                    <div class="card-body">
+
+                                        <!-- Form -->
+                                        <form class="text-center" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+
+                                            <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Sign Up</h3>
+
+                                            <!-- E-mail -->
+                                            <input formControlName="email" type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail" required>
+                                            <div *ngIf="myForm.get('email').invalid && (myForm.get('email').touched || myForm.get('email').dirty)">
+                                                <p *ngIf="myForm.get('email').hasError('required')" class="text-danger">Oops, please provide an email!</p>
+                                                <p *ngIf="myForm.get('email').hasError('pattern')" class="text-danger">Oops, wrong pattern buddy!</p>
+                                            </div>
+
+                                            <!-- Password -->
+                                            <input formControlName="password" type="password" id="defaultRegisterFormPassword" class="form-control mb-4" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+                                            <div *ngIf="myForm.get('password').invalid && (myForm.get('password').touched || myForm.get('password').dirty)">
+                                                <p *ngIf="myForm.get('password').hasError('required')" class="text-danger">Oops, please provide a password!</p>
+                                            </div>
+
+                                            <!-- Confirm Password -->
+                                            <input formControlName="confirmPassword" type="password" id="defaultRegisterFormConfirmPassword" class="form-control" placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
+                                            <div *ngIf="myForm.get('confirmPassword').invalid && (myForm.get('confirmPassword').touched || myForm.get('confirmPassword').dirty)">
+                                                <p *ngIf="myForm.get('confirmPassword').hasError('required')" class="text-danger">Oops, please provide a password!</p>
+                                                <p *ngIf="myForm.get('confirmPassword').hasError('MatchPassword')" class="text-danger">Oops, password not match!</p>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <button [disabled]="myForm.invalid" type="submit" class="btn btn-outline-orange btn-rounded my-4 waves-effect">Register</button>
+                                            </div>
+
+                                            <!-- Login -->
+                                            <p>Already a member ?
+                                                <a routerLink="/login">Login</a>
+                                            </p>
+
+                                            <!-- Social register -->
+                                            <p>or sign up with:</p>
+
+                                            <a (click)="authService.googleSignup()" class="mx-1" role="button"><i class="fab fa-google"></i></a>
+
+                                        </form>
+                                        <!-- Form -->
+
+                                    </div>
+
+                                </div>
+                                <!-- Material form login -->
+                            </div>
+                        </div>
+
+                    </form>
+
+                </section>
+                <!--Section: Content-->
+            </div>
+            <!-- Content -->
+        </div>
+        <!-- Mask & flexbox options-->
+    </div>
+    <!-- Full Page Intro -->
+
+</header>
+<!-- Main navigation -->
+
+<ngx-alerts></ngx-alerts>

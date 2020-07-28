@@ -1,0 +1,62 @@
+<!-- Main navigation -->
+<header>
+
+    <!-- Full Page Intro -->
+    <div id="verify-email" class="view">
+        <!-- Mask & flexbox options-->
+        <div class="mask">
+            <!-- Content -->
+            <div class="container h-100">
+                <!--Section: Content-->
+                <section class="p-5 my-md-5 text-center">
+
+                    <form class="my-3 mx-md-5" action="">
+
+                        <div class="row">
+                            <div class="container my-5 px-0 z-depth-1">
+
+                                <!--Section: Content-->
+                                <section class="text-center white-text grey p-5" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/background.jpg);">
+
+                                    <!--Grid row-->
+                                    <div class="row d-flex justify-content-center">
+
+                                        <!--Grid column-->
+                                        <div class="col-md-6">
+
+                                            <h3 class="font-weight-bold">Thank You for Registering</h3>
+
+                                            <div class="formGroup">
+                                                <p class="text-center">We have sent a confirmation email to your email.</p>
+                                                <p class="text-center">Please check your email and click on the link to verfiy your email address.</p>
+                                            </div>
+
+                                            <button (click)="authService.sendVerificationMail()" class="btn btn-outline-white btn-md waves-effect ml-0" role="button">Resend</button>
+                                            <a routerLink="/login" class="btn btn-outline-white btn-md waves-effect" role="button">User</a>
+                                            <a routerLink="/login-provider" class="btn btn-outline-white btn-md waves-effect" role="button">Provider</a>
+
+                                        </div>
+                                        <!--Grid column-->
+
+                                    </div>
+                                    <!--Grid row-->
+
+                                </section>
+                                <!--Section: Content-->
+
+                            </div>
+                        </div>
+
+                    </form>
+
+                </section>
+                <!--Section: Content-->
+            </div>
+            <!-- Content -->
+        </div>
+        <!-- Mask & flexbox options-->
+    </div>
+    <!-- Full Page Intro -->
+
+</header>
+<!-- Main navigation -->

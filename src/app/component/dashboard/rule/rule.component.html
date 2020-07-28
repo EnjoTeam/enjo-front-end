@@ -1,0 +1,170 @@
+<!-- Heading -->
+<div class="card mb-4 wow fadeIn">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <a routerLink="/dashboard">Dashboard</a>
+            <span> / </span>
+            <span>Rule</span>
+        </h4>
+
+    </div>
+
+</div>
+<!-- Heading -->
+
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+    <!--Grid column-->
+    <div class="col-md-12">
+
+        <!--Content-->
+        <div class="row mt-2">
+            <div class="mdl-card mdl-shadow--2dp">
+
+                <div class="mdl-card__supporting-text">
+
+                    <div class="mdl-stepper-horizontal-alternative">
+                        <div class="mdl-stepper-step active-step" [class.step-done]="hubID && deviceID && status">
+                            <div class="mdl-stepper-circle"><span>1</span></div>
+                            <div class="mdl-stepper-title mb-2">Select Device</div>
+                            <div class="mdl-stepper-optional">
+                                <select class="mb-3" [(ngModel)]='hubID' [ngModelOptions]="{standalone: true}" (change)="onChangeHub($event.target.value)">
+                                    <option [ngValue]="''" hidden>Select Hub</option>
+                                    <option *ngFor = 'let grp of listDevicesControl?.devices' [value]="grp?.id">
+                                        {{grp?.name}}
+                                    </option>
+                                </select>
+                                <select class="mb-3" [(ngModel)]='deviceID' [ngModelOptions]="{standalone: true}" (change)="onChangeDevice($event.target.value)">
+                                    <option [ngValue]="''" hidden>Select Device</option>
+                                    <option *ngFor = 'let device of deviceList' [value]="device?.id">
+                                        {{device?.nameDevice}}
+                                    </option>
+                                </select>
+                                <select [(ngModel)]='status' [ngModelOptions]="{standalone: true}">
+                                    <option [ngValue]="''" hidden>Select Status</option>
+                                    <option *ngFor = 'let s of statusArray' [value]="s">
+                                        {{s}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="mdl-stepper-bar-left"></div>
+                            <div class="mdl-stepper-bar-right"></div>
+                        </div>
+                        <div class="mdl-stepper-step" [class.active-step]="hubID && deviceID && status" [class.step-done]="startTime && endTime">
+                            <div class="mdl-stepper-circle"><span>2</span></div>
+                            <div class="mdl-stepper-title mb-2">Set Time</div>
+                            <div class="mdl-stepper-optional">
+                                <input [disabled]="!hubID || !deviceID || !status" [format]="24" [ngxTimepicker]="start" [(ngModel)]='startTime' class="form-control form-control-lg mb-3" placeholder="Start Time">
+                                <ngx-material-timepicker #start></ngx-material-timepicker>
+                                <input [disabled]="!hubID || !deviceID || !status" [format]="24" [ngxTimepicker]="end" [(ngModel)]='endTime' class="form-control form-control-lg" placeholder="End Time">
+                                <ngx-material-timepicker #end></ngx-material-timepicker>
+                            </div>
+                            <div class="mdl-stepper-bar-left"></div>
+                            <div class="mdl-stepper-bar-right"></div>
+                        </div>
+                        <div class="mdl-stepper-step" [class.active-step]="startTime && endTime && startTime < endTime" [class.step-done]="selectedItems.length >= 1">
+                            <div class="mdl-stepper-circle"><span>3</span></div>
+                            <div class="mdl-stepper-title mb-2">Set Day in Week</div>
+                            <div class="mdl-stepper-optional">
+                                <ng-multiselect-dropdown [disabled]="!startTime || !endTime || startTime > endTime" [placeholder]="'Select Day'" [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                </ng-multiselect-dropdown>
+                            </div>
+                            <div class="mdl-stepper-bar-left"></div>
+                            <div class="mdl-stepper-bar-right"></div>
+                        </div>
+                        <div class="mdl-stepper-step" [class.active-step]="selectedItems.length >= 1" [class.step-done]="selectedItems.length >= 1">
+                            <div class="mdl-stepper-circle"><span>4</span></div>
+                            <div class="mdl-stepper-title mb-2">Finish</div>
+                            <div class="mdl-stepper-optional">
+                                <button [disabled]="!hubID || !deviceID || !startTime || !endTime || selectedItems.length == 0 || !status" class="btn aqua-gradient" (click)="onSubmit()">Submit</button>
+                            </div>
+                            <div class=" mdl-stepper-bar-left "></div>
+                            <div class="mdl-stepper-bar-right "></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="container mt-2" *ngIf="rule">
+            <div class="card-columns">
+                <!--Panel-->
+                <div class="card" *ngFor="let r of rule.rules; let i = index">
+                    <h3 class="card-header light-blue lighten-1 white-text text-uppercase font-weight-bold text-center py-5">
+                        Rule #{{i+1}}
+                    </h3>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <a class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-2 h5">Day</h5>
+                                </div>
+                                <ul class="list-group list-group-horizontal-sm" *ngFor="let day of r.day_in_week.split(';')">
+                                    <li class="list-group-item" *ngIf="day == '2'">Monday</li>
+                                    <li class="list-group-item" *ngIf="day == '3'">Tuesday</li>
+                                    <li class="list-group-item" *ngIf="day == '4'">Wednesday</li>
+                                    <li class="list-group-item" *ngIf="day == '5'">Thursday</li>
+                                    <li class="list-group-item" *ngIf="day == '6'">Friday</li>
+                                    <li class="list-group-item" *ngIf="day == '7'">Saturday</li>
+                                    <li class="list-group-item" *ngIf="day == '8'">Sunday</li>
+                                </ul>
+                            </a>
+                            <a class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-2 h5">Hub</h5>
+                                </div>
+                                <p class="mb-2">
+                                    {{r.hub_name}}
+                                </p>
+                            </a>
+                            <a class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-2 h5">Device</h5>
+                                </div>
+                                <p class="mb-2">
+                                    {{r.device_name}}
+                                </p>
+                            </a>
+                            <a class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-2 h5">Status</h5>
+                                </div>
+                                <p class="mb-2">
+                                    {{r.expectation_status}}
+                                </p>
+                            </a>
+                            <a class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-2 h5"> Time</h5>
+                                </div>
+                                <p class="mb-2">
+                                    {{r.start_time}} - {{r.end_time}}
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted text-center mt-4" *ngIf="authService.user$ | async as user">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-danger" (click)="removeRule(user.uid, r.rule_id)">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                <!--/.Panel-->
+            </div>
+        </div>
+        <!--Content-->
+
+    </div>
+    <!--Grid column-->
+
+</div>
+<!--Grid row-->
+
+<!-- Alert -->
+<ngx-alerts></ngx-alerts>
+<!-- Alert -->

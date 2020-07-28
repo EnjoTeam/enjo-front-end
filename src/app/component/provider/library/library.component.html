@@ -1,0 +1,216 @@
+<div class="card shadow mb-4">
+    <div class="card-body shadow-sm p-5">
+        <!-- Default breadcrumb-->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/provider" class="text-uppercase">Home</a></li>
+                <li class="breadcrumb-item active text-uppercase">Library</li>
+            </ol>
+        </nav>
+        <h5 class="text-muted">Library Manager</h5>
+        <p class="font-italic text-muted">
+            You have to download our library to implement the code into the firmware.
+        </p>
+        <div class="text-center">
+            <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalContactForm">Register Library</a>
+        </div>
+        <!--Grid row-->
+        <div class="row wow fadeIn" *ngIf="!library">
+
+            <!--Grid column-->
+            <div class="col-md-12 mb-4">
+
+                <!-- Jumbotron -->
+                <div class="jumbotron text-center">
+
+                    <!-- Card image -->
+                    <img src="../../../../assets/img/background/nodata.svg" height="100" width="200" class="img-fluid text-center" alt="">
+                    <a href="#">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+
+                    <h5 class="indigo-text h5 mb-4">No Record!</h5>
+
+                </div>
+                <!-- Jumbotron -->
+
+            </div>
+            <!--Grid row-->
+
+        </div>
+        <!--Grid row-->
+        <div class="container my-5" *ngIf="library">
+
+            <section *ngIf="infoDevice">
+
+                <div class="card mb-4">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <img class="img-fluid rounded-left mh-100" src="{{infoDevice?.Image}}" alt="{{infoDevice?.type}}">
+                        </div>
+
+                        <div class="col-md-6 p-5 align-self-center">
+
+                            <h5 class="font-weight-normal mb-3">Hardware detail</h5>
+
+                            <p class="text-muted">{{infoDevice?.Detail}}</p>
+
+                            <ul class="list-unstyled font-small mt-5 mb-0">
+                                <li>
+                                    <p class="text-uppercase mb-2"><strong>Manufacturer</strong></p>
+                                    <p class="text-muted mb-4">{{infoDevice?.Manufacturer}}</p>
+                                </li>
+
+                                <li>
+                                    <p class="text-uppercase mb-2"><strong>Release Date</strong></p>
+                                    <p class="text-muted mb-4">{{infoDevice?.Release}}</p>
+                                </li>
+
+                                <li>
+                                    <p class="text-uppercase mb-2"><strong>CPU</strong></p>
+                                    <p class="text-muted mb-4">{{infoDevice?.CPU}}</p>
+                                </li>
+
+                                <li>
+                                    <p class="text-uppercase mb-2"><strong>Memory</strong></p>
+                                    <p class="text-muted mb-4">{{infoDevice?.Memory}}</p>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="container my-5">
+
+
+                    <!--Section: Content-->
+                    <section class="dark-grey-text">
+
+                        <!-- Section heading -->
+                        <h3 class="text-center font-weight-bold mb-4 pb-2">Developer Enviroment</h3>
+                        <hr class="w-header">
+                        <!-- Section description -->
+                        <p class="lead text-center w-responsive mx-auto text-muted mt-4 pt-2 mb-5">This fields include guide to develop your IoT device.</p>
+
+                        <!--First row-->
+                        <div class="row">
+
+                            <!--First column-->
+                            <div class="col-md-6 mb-4">
+
+                                <!-- Card -->
+                                <a class="card hoverable">
+
+                                    <!-- Card content -->
+                                    <div class="card-body">
+
+                                        <p><i class="fas fa-download fa-3x text-primary"></i></p>
+                                        <h5 class="dark-grey-text my-4">Library</h5>
+                                        <p class="text-muted font-weight-light mb-0">Visit the link below to download a library of equipment for programming.</p>
+                                        <div class="input-group mb-3 mt-2">
+                                            <div class="input-group-prepend">
+                                                <button (click)="copyInputMessage(link)" class="btn btn-md btn-outline-primary m-0 px-3 py-2 z-depth-0 waves-effect" type="button" id="button-addon1">Copy</button>
+                                            </div>
+                                            <input readonly type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="{{library.link}}" #link>
+                                        </div>
+
+                                    </div>
+
+                                </a>
+                                <!-- Card -->
+
+                            </div>
+                            <!--First column-->
+
+                            <!--Second column-->
+                            <div class="col-md-6 mb-4">
+
+                                <!-- Card -->
+                                <a class="card hoverable">
+
+                                    <!-- Card content -->
+                                    <div class="card-body">
+
+                                        <p><i class="fas fa-key fa-3x text-warning"></i></p>
+                                        <h5 class="dark-grey-text my-4">Secret Key</h5>
+                                        <p class="text-muted font-weight-light mb-0">Save this key to receive premium feature of our service.</p>
+                                        <div class="input-group mb-3 mt-2">
+                                            <div class="input-group-prepend">
+                                                <button (click)="copyInputMessage(token)" class="btn btn-md btn-outline-primary m-0 px-3 py-2 z-depth-0 waves-effect" type="button" id="button-addon1">Copy</button>
+                                            </div>
+                                            <input readonly type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="{{library.token}}" #token>
+                                        </div>
+
+                                    </div>
+
+                                </a>
+                                <!-- Card -->
+
+                            </div>
+                            <!--Second column-->
+
+                        </div>
+                        <!--First row-->
+
+                    </section>
+
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Register Library</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <select class="mb-3" formControlName="device">
+                            <option value="" disabled>Choose your device</option>
+                            <option *ngFor = 'let hub of listHub' [ngValue]="hub">
+                                {{hub}}
+                            </option>
+                        </select>
+                        <div *ngIf="myForm.get('device').invalid && (myForm.get('device').touched || myForm.get('device').dirty)">
+                            <p *ngIf="myForm.get('device').hasError('required')" class="text-danger">Oops, please provide a device!</p>
+                        </div>
+                    </div>
+
+                    <!-- <div class="md-form mb-5">
+                        <select class="mb-3" formControlName="number">
+                            <option value="" disabled>Choose number device</option>
+                            <option *ngFor = 'let n of listNumber' [ngValue]="n">
+                                {{n}}
+                            </option>
+                        </select>
+                        <div *ngIf="myForm.get('number').invalid && (myForm.get('number').touched || myForm.get('number').dirty)">
+                            <p *ngIf="myForm.get('number').hasError('required')" class="text-danger">Oops, please provide a number!</p>
+                        </div>
+                    </div> -->
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button [disabled]="myForm.invalid" type="submit" class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ngx-alerts></ngx-alerts>

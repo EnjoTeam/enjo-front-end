@@ -1,0 +1,328 @@
+<!-- Heading -->
+<div class="card mb-4 wow fadeIn">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <a routerLink="/dashboard">Dashboard</a>
+            <span> / </span>
+            <span>Device</span>
+        </h4>
+
+    </div>
+
+</div>
+<!-- Heading -->
+
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+    <!--Grid column-->
+    <div class="col-md-12">
+
+        <!--Content-->
+        <div class="col-md-7 mt-2">
+            <button type="button" class="btn blue-gradient waves-effect px-3" data-toggle="modal" data-target="#addDeviceControlModal">
+                <i class="fas fa-plus"></i>                    
+            </button>
+            <button type="button" class="btn purple-gradient waves-effect px-3" data-toggle="modal" data-target="#centralModalWarning">
+                <i class="fas fa-pencil-alt"></i>                    
+            </button>
+            <button type="button" class="btn peach-gradient waves-effect px-3" data-toggle="modal" data-target="#centralModalDanger">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+        <div class="row mt-2">
+            <div class="col-md-4" *ngFor="let device of listDevicesControl?.devices">
+                <!--Card-->
+                <div class="card card-cascade mt-2 mb-2">
+
+                    <!--Card image-->
+                    <div class="view view-cascade">
+                        <img width="150" height="200" src="{{device?.image}}" class="card-img-top" alt="">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <!--/.Card image-->
+
+                    <!--Card content-->
+                    <div class="card-body card-body-cascade text-center">
+                        <!--Title-->
+                        <h4 class="card-title"><strong>{{ device?.name }}</strong></h4>
+                        <h5>{{ device?.type }}</h5>
+                        <p [ngClass]="{
+                            'text-danger':device?.alive === false,
+                            'text-success':device?.alive === true
+                          }">{{ device?.alive ? "Online":"Offline" }}</p>
+                        <!--Title-->
+                    </div>
+                    <!--/.Card content-->
+
+                </div>
+                <!--/.Card-->
+            </div>
+        </div>
+        <!--Content-->
+
+    </div>
+    <!--Grid column-->
+
+</div>
+<!--Grid row-->
+
+<!-- Modal -->
+<div class="modal fade" id="addDeviceControlModal" tabindex="-1" role="dialog" aria-labelledby="addDeviceModal" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-primary" role="document">
+
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Forms-->
+            <form [formGroup]="addForm" (ngSubmit)="onSubmitAdd(addForm)">
+
+                <!--Header-->
+                <div class="modal-header">
+                    <p class="heading lead">Add Device</p>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+                <!--Header-->
+
+                <!--Body-->
+                <div class="modal-body mx-3">
+
+                    <div class="input-group mb-4">
+                        <select formControlName="device" class="browser-default custom-select" id="inputGroupSelect02">
+                            <option value="" disabled>Choose your device</option>
+                            <option *ngFor='let device of devicesControl?.devices' [ngValue]="device?.id">
+                                {{device?.name}}
+                            </option>
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                        </div>
+                    </div>
+                    <div *ngIf="addForm.get('device').invalid && (addForm.get('device').touched || addForm.get('device').dirty)">
+                        <p *ngIf="addForm.get('device').hasError('required')" class="text-danger">Oops, please provide a device!</p>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <i class="fas fa-lock prefix grey-text"></i>
+                        <input formControlName="password" name="password" type="password" id="password" class="form-control">
+                        <label for="password">Device Password</label>
+                    </div>
+                    <div *ngIf="addForm.get('password').invalid && (addForm.get('password').touched || addForm.get('password').dirty)">
+                        <p *ngIf="addForm.get('password').hasError('required')" class="text-danger">Oops, please provide a password!</p>
+                    </div>
+
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input formControlName="photo" type="file" accept="image/*" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+                    <div *ngIf="addForm.get('photo').invalid && (addForm.get('photo').touched || addForm.get('photo').dirty)">
+                        <p *ngIf="addForm.get('photo').hasError('required')" class="text-danger">Oops, please provide a photo!</p>
+                    </div>
+
+                    <!--Card-->
+                    <div class="card card-cascade">
+
+                        <!--Card image-->
+                        <div class="view view-cascade">
+                            <img [src]="src" [hidden]="!src" class="card-img-top" alt="">
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <!--/.Card image-->
+
+                    </div>
+                    <!--/.Card-->
+
+                </div>
+                <!--Body-->
+
+                <!--Footer-->
+                <div class="modal-footer justify-content-center">
+                    <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Add</button>
+                    <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">Cancel</a>
+                </div>
+                <!--Footer-->
+
+            </form>
+            <!--Forms-->
+
+        </div>
+        <!--/.Content-->
+
+    </div>
+</div>
+<!-- Modal -->
+
+<!-- Central Modal Medium Danger -->
+<div class="modal fade" id="centralModalDanger" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Forms-->
+            <form [formGroup]="removeForm" (ngSubmit)="onSubmitRemove(removeForm)" novalidate>
+
+                <!--Header-->
+                <div class="modal-header">
+                    <p class="heading lead">Delete Device</p>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body mx-3">
+                    <div class="input-group mb-4">
+                        <select formControlName="device" class="browser-default custom-select" id="inputRemove">
+                            <option value="" disabled>Choose your device</option>
+                            <option *ngFor='let device of listDevicesControl?.devices' [ngValue]="device?.id">
+                                {{device?.name}}
+                            </option>
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputRemove">Options</label>
+                        </div>
+                    </div>
+                    <div *ngIf="removeForm.get('device').invalid && (removeForm.get('device').touched || removeForm.get('device').dirty)">
+                        <p *ngIf="removeForm.get('device').hasError('required')" class="text-danger">Oops, please provide a device!</p>
+                    </div>
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer justify-content-center">
+                    <button [disabled]="removeForm.invalid" type="submit" class="btn btn-danger">Delete</button>
+                    <a type="button" class="btn btn-outline-danger waves-effect" data-dismiss="modal">Cancel</a>
+                </div>
+
+            </form>
+            <!--Forms-->
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Medium Danger-->
+
+<!-- Central Modal Medium Warning -->
+<div class="modal fade" id="centralModalWarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-warning" role="document">
+        <!--Content-->
+        <div class="modal-content">
+
+            <!--Forms-->
+            <form [formGroup]="editForm" (ngSubmit)="onSubmitEdit(editForm)" novalidate>
+
+                <!--Header-->
+                <div class="modal-header">
+                    <p class="heading lead">Edit Form</p>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </button>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body mx-3">
+                    <div class="input-group mb-4">
+                        <select formControlName="device" class="browser-default custom-select" id="inputEdit">
+                            <option value="" disabled>Choose your device</option>
+                            <option *ngFor='let device of listDevicesControl?.devices' [ngValue]="device?.id">
+                                {{device?.name}}
+                            </option>
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputEdit">Options</label>
+                        </div>
+                    </div>
+                    <div *ngIf="editForm.get('device').invalid && (editForm.get('device').touched || editForm.get('device').dirty)">
+                        <p *ngIf="editForm.get('device').hasError('required')" class="text-danger">Oops, please provide a device!</p>
+                    </div>
+
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputPhoto">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input formControlName="photo" type="file" accept="image/*" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions">
+                            <label class="custom-file-label" for="inputPhoto">Choose file</label>
+                        </div>
+                    </div>
+                    <div *ngIf="addForm.get('photo').invalid && (addForm.get('photo').touched || addForm.get('photo').dirty)">
+                        <p *ngIf="addForm.get('photo').hasError('required')" class="text-danger">Oops, please provide a photo!</p>
+                    </div>
+
+                    <!--Card-->
+                    <div class="card card-cascade">
+
+                        <!--Card image-->
+                        <div class="view view-cascade">
+                            <img [src]="src" [hidden]="!src" class="card-img-top" alt="">
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <!--/.Card image-->
+
+                    </div>
+                    <!--/.Card-->
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer justify-content-center">
+                    <button [disabled]="editForm.invalid" type="submit" class="btn btn-warning">Edit</button>
+                    <a type="button" class="btn btn-outline-warning waves-effect" data-dismiss="modal">Cancel</a>
+                </div>
+
+            </form>
+            <!--Forms-->
+
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Medium Warning-->
+
+<!--Grid row-->
+<div class="row wow fadeIn" *ngIf="listDevicesControl?.devices.length == 0">
+
+    <!--Grid column-->
+    <div class="col-md-12 mb-4">
+
+        <!-- Jumbotron -->
+        <div class="jumbotron text-center">
+
+            <!-- Card image -->
+            <img src="../../../../assets/img/background/nodata.svg" height="100" width="200" class="img-fluid text-center" alt="">
+            <a href="#">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+
+            <h5 class="indigo-text h5 mb-4">No Record!</h5>
+
+        </div>
+        <!-- Jumbotron -->
+
+    </div>
+    <!--Grid row-->
+
+</div>
+<!--Grid row-->
+
+<!-- Alert -->
+<ngx-alerts></ngx-alerts>
+<!-- Alert -->
