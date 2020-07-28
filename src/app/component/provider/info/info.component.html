@@ -1,0 +1,172 @@
+<div class="card shadow mb-4">
+    <div class="card-body shadow-sm p-5">
+        <!-- Default breadcrumb-->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/provider" class="text-uppercase">Home</a></li>
+                <li class="breadcrumb-item active text-uppercase">About</li>
+            </ol>
+        </nav>
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden" *ngIf="authService.user$ | async as user">
+            <div class="px-4 pt-0 pb-4 bg-primary">
+                <div class="media align-items-end profile-header">
+                    <div class="profile mr-3">
+                        <img src="{{user.photoURL}}" alt="{{user.email}}" width="130" class="rounded mb-2 img-thumbnail"><a class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#modalLoginForm">Edit image</a>
+                    </div>
+                    <div class="media-body mb-5 text-white">
+                        <h4 class="mt-0 mb-0">
+                            {{user.displayName}}
+                        </h4>
+                        <p class="small mb-4"><i class="far fa-envelope mr-2"></i>{{user.email}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-elegant waves-effect" data-toggle="modal" data-target="#modalRegisterForm">
+                                    <i class="fas fa-user-edit"></i>
+                                </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <!-- Tabs nav -->
+                    <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link mb-3 p-3 shadow active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <i class="far fa-building mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Company</span></a>
+
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                            <i class="fas fa-globe mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Location</span></a>
+
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <i class="fas fa-signature mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Name</span></a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-9">
+                    <!-- Tabs content -->
+                    <div class="tab-content" id="v-pills-tabContent" *ngIf="authService.user$ | async as user">
+                        <div class="tab-pane fade shadow rounded bg-white show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <h4 class="font-italic mb-4">Company</h4>
+                            <p class="font-italic text-muted mb-2">{{user.company}}</p>
+                        </div>
+
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                            <h4 class="font-italic mb-4">Location</h4>
+                            <p class="font-italic text-muted mb-2">{{user.location}}</p>
+                        </div>
+
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                            <h4 class="font-italic mb-4">Name</h4>
+                            <p class="font-italic text-muted mb-2">{{user.displayName}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End profile widget -->
+    </div>
+</div>
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--Forms-->
+            <form [formGroup]="imageForm" (ngSubmit)="onSubmitImage()">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Edit Image</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input formControlName="photo" type="file" accept="image/*" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+                    <div *ngIf="imageForm.get('photo').invalid && (imageForm.get('photo').touched || imageForm.get('photo').dirty)">
+                        <p *ngIf="imageForm.get('photo').hasError('required')" class="text-danger">Oops, please provide a photo!</p>
+                    </div>
+
+                    <!--Card-->
+                    <div class="card card-cascade">
+
+                        <!--Card image-->
+                        <div class="view view-cascade">
+                            <img [src]="src" [hidden]="!src" class="card-img-top" alt="">
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <!--/.Card image-->
+
+                    </div>
+                    <!--/.Card-->
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button [disabled]="!src" type="submit" class="btn btn-default">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Forms-->
+        <form [formGroup]="userForm" (ngSubmit)="onSubmitUser(userForm)">
+            <div class="modal-content" *ngIf="authService.user$ | async as user">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Edit User</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-5">
+                        <i class="fas fa-signature prefix grey-text"></i>
+                        <input formControlName="name" type="text" id="orangeForm-name" class="form-control validate" [(ngModel)]="user.displayName">
+                    </div>
+                    <div *ngIf="userForm.get('name').invalid && (userForm.get('name').touched || userForm.get('name').dirty)">
+                        <p *ngIf="userForm.get('name').hasError('required')" class="text-danger">Oops, please provide a name!</p>
+                    </div>
+
+                    <div class="md-form mb-5">
+                        <i class="fas fa-globe prefix grey-text"></i>
+                        <input formControlName="location" type="text" id="orangeForm-email" class="form-control validate" [(ngModel)]="user.location">
+                    </div>
+                    <div *ngIf="userForm.get('location').invalid && (userForm.get('location').touched || userForm.get('location').dirty)">
+                        <p *ngIf="userForm.get('location').hasError('required')" class="text-danger">Oops, please provide a location!</p>
+                    </div>
+
+                    <div class="md-form mb-4">
+                        <i class="far fa-building prefix grey-text"></i>
+                        <input formControlName="company" type="text" id="orangeForm-pass" class="form-control validate" [(ngModel)]="user.company">
+                    </div>
+                    <div *ngIf="userForm.get('company').invalid && (userForm.get('company').touched || userForm.get('company').dirty)">
+                        <p *ngIf="userForm.get('company').hasError('required')" class="text-danger">Oops, please provide a company!</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button [disabled]="userForm.invalid" type="submit" class="btn btn-deep-orange">Edit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

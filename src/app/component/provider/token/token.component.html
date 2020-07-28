@@ -1,0 +1,193 @@
+<div class="card shadow mb-4">
+    <div class="card-body shadow-sm p-5">
+        <!-- Default breadcrumb-->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a routerLink="/provider" class="text-uppercase">Home</a></li>
+                <li class="breadcrumb-item active text-uppercase">Token</li>
+            </ol>
+        </nav>
+        <h5 class="text-muted">Token Manager</h5>
+        <!--Grid row-->
+        <div class="row wow fadeIn" *ngIf="recordToken.length == 0">
+
+            <!--Grid column-->
+            <div class="col-md-12 mb-4">
+
+                <!-- Jumbotron -->
+                <div class="jumbotron text-center">
+
+                    <!-- Card image -->
+                    <img src="../../../../assets/img/background/nodata.svg" height="100" width="200" class="img-fluid text-center" alt="">
+                    <a href="#">
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+
+                    <h5 class="indigo-text h5 mb-4">No Record!</h5>
+
+                </div>
+                <!-- Jumbotron -->
+
+            </div>
+            <!--Grid row-->
+
+        </div>
+        <!--Grid row-->
+        <div class="mw-100" *ngIf="recordToken.length > 0">
+            <!-- <ng2-smart-table *ngIf="recordToken" [settings]="settings" [source]="recordToken"></ng2-smart-table> -->
+
+            <table class="table table-bordered">
+                <thead class="primary-color white-text">
+                    <tr>
+                        <th scope="col">Datetime</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Token</th>
+                        <th scope="col">Type Device</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let record of recordToken">
+                        <th scope="row">{{record.timestamp * 1000 | date: 'dd/MM/yyyy hh:mm'}}</th>
+                        <td>
+                            <p *ngIf="record.mac.length === 1" class="text-success">using</p>
+                            <p *ngIf="record.mac.length === 0" class="text-danger">not used yet</p>
+                        </td>
+                        <td>*************************</td>
+                        <td>{{record.type_hubs}}</td>
+                        <td>
+                            <i style="cursor: pointer;" class="fas fa-thumbtack fa-lg cyan-text" aria-hidden="true" data-toggle="modal" data-target="#centralModalWarning" (click)="getValue(record)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+<!-- Central Modal Medium Warning -->
+<div class="modal fade" id="centralModalWarning" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-warning" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Info</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="white-text">&times;</span>
+          </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <!--Section: Content-->
+                <section class="text-center">
+
+                    <div class="col-lg-12 text-center text-md-left" *ngIf="token">
+
+                        <h2 class="h2-responsive text-center text-md-left product-name font-weight-bold dark-grey-text mb-1 ml-xl-0 ml-4">
+                            <strong>Token Details</strong>
+                        </h2>
+                        <span class="badge badge-danger product mb-4 ml-xl-0 ml-4">{{token.type_hubs}}</span>
+                        <h3 class="h3-responsive text-center text-md-left mb-5 ml-xl-0 ml-4">
+                            <span class="red-text font-weight-bold">
+                                <strong>{{token.timestamp * 1000 | date: 'dd/MM/yyyy hh:mm'}}</strong>
+                            </span>
+                        </h3>
+
+                        <!--Accordion wrapper-->
+                        <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                            <!-- Accordion card -->
+                            <div class="card">
+
+                                <!-- Card header -->
+                                <div class="card-header" role="tab" id="headingOne1">
+                                    <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+                                        <h5 class="mb-0">
+                                            MAC Address
+                                            <i class="fas fa-angle-down rotate-icon"></i>
+                                        </h5>
+                                    </a>
+                                </div>
+
+                                <!-- Card body -->
+                                <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+                                    <div class="card-body">
+                                        <ul class="list-group" *ngIf="token.mac">
+                                            <li class="list-group-item" *ngFor="let hub of token.mac; let i = index">
+                                                <p class="note note-primary">{{hub}}</p>
+                                            </li>
+                                        </ul>
+                                        <p class="note note-secondary" *ngIf="token.mac.length == 0"> empty</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Accordion card -->
+
+                            <!-- Accordion card -->
+                            <div class="card">
+
+                                <!-- Card header -->
+                                <div class="card-header" role="tab" id="headingTwo2">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                                        <h5 class="mb-0">
+                                            Library
+                                            <i class="fas fa-angle-down rotate-icon"></i>
+                                        </h5>
+                                    </a>
+                                </div>
+
+                                <!-- Card body -->
+                                <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
+                                    <div class="card-body">
+                                        <p *ngIf="token.type_hubs === 'ESP32'" class="note note-success">https://www.enjo-iot.xyz/files/esp32-library.zip</p>
+                                        <p *ngIf="token.type_hubs === 'ESP8266'" class="note note-success">https://www.enjo-iot.xyz/files/esp8266-library.zip</p>
+                                        <p *ngIf="token.type_hubs === 'RASPBIAN'" class="note note-success">https://www.enjo-iot.xyz/files/raspbian-library.zip</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Accordion card -->
+
+                            <!-- Accordion card -->
+                            <div class="card">
+
+                                <!-- Card header -->
+                                <div class="card-header" role="tab" id="headingThree3">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3" aria-expanded="false" aria-controls="collapseThree3">
+                                        <h5 class="mb-0">
+                                            Token
+                                            <i class="fas fa-angle-down rotate-icon"></i>
+                                        </h5>
+                                    </a>
+                                </div>
+
+                                <!-- Card body -->
+                                <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3" data-parent="#accordionEx">
+                                    <div class="card-body">
+                                        <p class="note note-info">{{token.token}}</p>
+                                        <p class="note note-danger"><strong>Note:</strong> Don't share this token for anyone!</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Accordion card -->
+
+                        </div>
+                        <!--/.Accordion wrapper-->
+
+                    </div>
+                </section>
+                <!--Section: Content-->
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-outline-warning waves-effect" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!-- Central Modal Medium Warning-->

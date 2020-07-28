@@ -1,0 +1,101 @@
+<!-- Heading -->
+<div class="card mb-4 wow fadeIn">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <a routerLink="/dashboard">Dashboard</a>
+            <span> / </span>
+            <span>History</span>
+        </h4>
+
+    </div>
+
+</div>
+<!-- Heading -->
+
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+    <!--Grid column-->
+    <!-- <div class="col-md-12" *ngIf="history">
+        <div class="list-group" *ngFor="let h of history  | orderBy: timestamp: true">
+            <a class="list-group-item list-group-item-action flex-column align-items-start ">
+                <div class="d-flex w-100 justify-content-between ">
+                    <h5 class="mb-2 h5 ">{{h.username}}</h5>
+                    <small>{{ h.timestamp * 1000 | timeAgo }}</small>
+                </div>
+                <p class="mb-2 ">
+                    {{ h.action }}
+                </p>
+            </a>
+        </div>
+    </div> -->
+
+
+    <div class="col-md-3">
+        <!-- Tabs nav -->
+        <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a *ngFor="let hub of listDevicesControl?.devices" class="nav-link mb-3 p-3 shadow" (click)="selectedHub = hub" [class.active]="selectedHub===hub">
+                <i class="fa fa-user-circle-o mr-2"></i>
+                <span class="font-weight-bold small text-uppercase">{{hub.name}}</span>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="col-md-9">
+        <!-- Tabs content -->
+        <div class="tab-content" id="v-pills-tabContent" *ngFor="let hub of listDevicesControl?.devices">
+            <div class="tab-pane fade shadow rounded bg-white show p-5" [class.active]="selectedHub===hub" *ngIf="selectedHub===hub">
+                <h4 class="font-italic mb-4">{{hub.name}}</h4>
+                <div class="card" *ngFor="let device of hub.devices">
+                    <div class="card-body">
+                        <h4 class="card-title"><a>{{device.nameDevice}}</a></h4>
+                        <div class="list-group" *ngFor="let history of device.history">
+                            <a class="list-group-item list-group-item-action flex-column align-items-start ">
+                                <div class="d-flex w-100 justify-content-between ">
+                                    <h5 class="mb-2 h5 ">{{history.username}}</h5>
+                                    <small>{{ history.timestamp * 1000 | timeago}}</small>
+                                </div>
+                                <p class="mb-2 ">
+                                    {{ history.action }}
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Grid column-->
+
+</div>
+<!--Grid row-->
+
+<!--Grid row-->
+<div class="row wow fadeIn" *ngIf="listDevicesControl?.devices.length == 0">
+
+    <!--Grid column-->
+    <div class="col-md-12 mb-4">
+
+        <!-- Jumbotron -->
+        <div class="jumbotron text-center">
+
+            <!-- Card image -->
+            <img src="../../../../assets/img/background/nodata.svg" height="100" width="200" class="img-fluid text-center" alt="">
+            <a href="#">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+
+            <h5 class="indigo-text h5 mb-4">No Record!</h5>
+
+        </div>
+        <!-- Jumbotron -->
+
+    </div>
+    <!--Grid row-->
+
+</div>
+<!--Grid row-->

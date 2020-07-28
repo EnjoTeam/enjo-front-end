@@ -1,0 +1,172 @@
+<!-- Heading -->
+<div class="card mb-4 wow fadeIn">
+
+    <!--Card content-->
+    <div class="card-body d-sm-flex justify-content-between">
+
+        <h4 class="mb-2 mb-sm-0 pt-1">
+            <a routerLink="/dashboard">Dashboard</a>
+            <span> / </span>
+            <span>Profile</span>
+        </h4>
+
+    </div>
+
+</div>
+<!-- Heading -->
+
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+    <!--Grid column-->
+    <div class="col-md-12 mb-4">
+
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden" *ngIf="authService.user$ | async as user">
+            <div class="px-4 pt-0 pb-4 bg-primary">
+                <div class="media align-items-end profile-header">
+                    <div class="profile mr-3">
+                        <img src="{{user.photoURL}}" alt="{{user.email}}" width="130" class="rounded mb-2 img-thumbnail"><a class="btn btn-primary btn-sm btn-block" data-toggle="modal" data-target="#modalLoginForm">Edit image</a>
+                    </div>
+                    <div class="media-body mb-5 text-white">
+                        <h4 class="mt-0 mb-0">
+                            {{user.displayName}}
+                        </h4>
+                        <p class="small mb-4"><i class="far fa-envelope mr-2"></i>{{user.email}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-elegant waves-effect" data-toggle="modal" data-target="#basicExampleModal">
+                            <i class="fas fa-user-edit"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <!-- Tabs nav -->
+                    <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link mb-3 p-3 shadow active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <i class="far fa-building mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Company</span></a>
+
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                            <i class="fas fa-globe mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Location</span></a>
+
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                            <i class="fas fa-signature mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Name</span></a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-9">
+                    <!-- Tabs content -->
+                    <div class="tab-content" id="v-pills-tabContent" *ngIf="authService.user$ | async as user">
+                        <div class="tab-pane fade shadow rounded bg-white show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <h4 class="font-italic mb-4">Company</h4>
+                            <p class="font-italic text-muted mb-2">{{user.company}}</p>
+                        </div>
+
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                            <h4 class="font-italic mb-4">Location</h4>
+                            <p class="font-italic text-muted mb-2">{{user.location}}</p>
+                        </div>
+
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                            <h4 class="font-italic mb-4">Name</h4>
+                            <p class="font-italic text-muted mb-2">{{user.displayName}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End profile widget -->
+
+    </div>
+    <!--Grid column-->
+
+</div>
+<!--Grid row-->
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">Edit Image</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" accept="image/*" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" imageUpload (imageSelected)="selected($event)" [resizeOptions]="resizeOptions">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
+                </div>
+                <p class="red-text" *ngIf="!src">
+                    Oops, please provide a image
+                </p>
+
+                <!--Card-->
+                <div class="card card-cascade">
+
+                    <!--Card image-->
+                    <div class="view view-cascade">
+                        <img [src]="src" [hidden]="!src" class="card-img-top" alt="">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+                    <!--/.Card image-->
+
+                </div>
+                <!--/.Card-->
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button [disabled]="!src" type="button" (click)="changeImage()" class="btn btn-default">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form #profileForm="ngForm" (ngSubmit)="onSubmit(profileForm)" novalidate>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Name</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body" *ngIf="authService.user$ | async as user">
+                    <div class="md-form mb-4">
+                        <i class="fas fa-lock prefix grey-text"></i>
+                        <input id="userName" class="form-control" [(ngModel)]="user.displayName" name="userName" #pickedName="ngModel" required>
+                        <label for="userName" [hidden]="pickedName.valid">Name Display</label>
+                        <p class="red-text" *ngIf="!pickedName.valid && pickedName.touched">
+                            Oops, please provide a name!
+                        </p>
+                    </div>
+                </div>
+                <!-- Value of whole form -->
+                <div class="modal-footer">
+                    <button [disabled]="!profileForm.form.valid" type="submit" class="btn btn-secondary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

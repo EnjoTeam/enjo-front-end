@@ -1,0 +1,500 @@
+<!--Main Navigation-->
+<header>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+
+        <div class="container">
+
+            <!-- Navbar brand -->
+            <!-- <a class="navbar-brand" routerLink="/">Enjo</a> -->
+            <img class="navbar-brand" src="../../../assets/img/logo/ej-1-brand.png" width="36px" height="40px">
+
+            <!-- Collapse button -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+            <!-- Collapsible content -->
+            <div class="collapse navbar-collapse" id="basicExampleNav">
+
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" [ngx-scroll-to]="'intro'">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [ngx-scroll-to]="'service'">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [ngx-scroll-to]="'project'">Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [ngx-scroll-to]="'pricing'">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" [ngx-scroll-to]="'team'">Team</a>
+                    </li>
+                </ul>
+                <!-- Left -->
+
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link waves-effect" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLink="/login-provider" class="nav-link border border-light rounded waves-effect mr-2" target="_blank">
+                            <i class="far fa-building mr-1"></i>Provider
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a routerLink="/login" class="nav-link border border-light rounded waves-effect mr-2" target="_blank">
+                            <i class="fas fa-users mr-1"></i>Join Us
+                        </a>
+                    </li>
+                </ul>
+                <!-- Right -->
+            </div>
+            <!-- Collapsible content -->
+        </div>
+    </nav>
+    <!--/.Navbar-->
+
+    <!--Mask-->
+    <div id="intro" class="view">
+
+        <div class="mask rgba-black-strong">
+
+            <div class="container-fluid d-flex align-items-center justify-content-center h-100">
+
+                <div class="row d-flex justify-content-center text-center">
+
+                    <div class="col-md-10">
+
+                        <!-- Heading -->
+                        <!-- <h2 id="logo" class="display-4 font-weight-bold pt-5 mb-2">Enjo</h2> -->
+                        <img src="../../../assets/img/logo/ej-1-removebg-preview.png" class="rounded mx-auto d-block" alt="...">
+
+                        <!-- Divider -->
+                        <hr class="hr-light">
+
+                        <!-- Description -->
+                        <h4 class="white-text my-4">An IoT's platform allow us combining multi-platform devices together.</h4>
+                        <button [ngx-scroll-to]="'service'" type="button" class="btn btn-outline-white">Read more<i class="fas fa-book ml-2"></i></button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!--/.Mask-->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main>
+    <div id="service" class="container pt-5 my-5 min-vh-100 d-flex align-items-center justify-content-center">
+        <!--Section: Service-->
+        <section>
+
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center align-items-center">
+
+                <!--Grid column-->
+                <div class="col-md-12">
+
+                    <h3 class="font-weight-bold text-center dark-grey-text pb-2">Our Services</h3>
+                    <hr class="w-header my-4">
+                    <p class="lead text-center text-muted pt-2 mb-5">
+                        We provide many services to interact with IoT devices easily.
+                    </p>
+
+                    <div class="row">
+
+                        <div class="col-md-4 col-xl-4 mb-4">
+                            <div class="card text-center bg-success text-white">
+                                <div class="card-body">
+                                    <p class="mt-4 pt-2"><i class="fas fa-cloud fa-4x"></i></p>
+                                    <h5 class="font-weight-normal my-4 py-2"><a class="text-white" href="#">Cloud</a></h5>
+                                    <p class="mb-4">We use cloud services with large log storage.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-xl-4 mb-4">
+                            <div class="card text-center orange lighten-2 text-white">
+                                <div class="card-body">
+                                    <p class="mt-4 pt-2"><i class="fas fa-microchip fa-4x"></i></p>
+                                    <h5 class="font-weight-normal my-4 py-2"><a class="text-white" href="#">Hardware</a></h5>
+                                    <p class="mb-4">We allow the integration of many popular IoT devices in the world today.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-xl-4 mb-4">
+                            <div class="card text-center deep-purple lighten-1 text-white">
+                                <div class="card-body">
+                                    <p class="mt-4 pt-2"><i class="fas fa-mobile-alt fa-4x"></i></p>
+                                    <h5 class="font-weight-normal my-4 py-2"><a class="text-white" href="#">Mobile Apps</a></h5>
+                                    <p class="mb-4">We develop mobile apps that manage and monitor of IoT devices.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+        </section>
+        <!--/.Section: Service-->
+    </div>
+
+    <div id="project" class="container pt-5 my-5 min-vh-100 d-flex align-items-center justify-content-center">
+
+        <!-- Section: Block Content -->
+        <section class="dark-grey-text">
+
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center align-items-center">
+
+                <!--Grid column-->
+                <div class="col-md-12">
+
+                    <h3 class="font-weight-bold text-center dark-grey-text pb-2">Our Projects</h3>
+                    <hr class="w-header my-4">
+                    <p class="lead text-center text-muted pt-2 mb-5">
+                        We are starting with the project to integrate IoT devices and manage them.
+                    </p>
+
+                    <!-- Grid row -->
+                    <div class="row">
+
+                        <!-- Grid column -->
+                        <div class="col-lg-5 mb-lg-0 mb-5">
+
+                            <img src="https://cdn.dribbble.com/users/1726280/screenshots/6169074/smart-home-app-design_2x.png" class="img-fluid rounded z-depth-1" alt="Sample project image">
+
+                        </div>
+                        <!-- Grid column -->
+
+                        <!-- Grid column -->
+                        <div class="col-lg-7">
+
+                            <ul class="list-unstyled fa-ul mb-0 mt-4">
+                                <li class="d-flex justify-content-center pl-4">
+                                    <span class="fa-li"><i class="fas fa-book fa-2x cyan-text"></i></span>
+                                    <div>
+                                        <h5 class="font-weight-bold mb-3">Document</h5>
+                                        <p class="text-muted">We have clear, intuitive presentation documents to help programmers easily program the device.</p>
+                                    </div>
+                                </li>
+                                <li class="d-flex justify-content-center pl-4">
+                                    <span class="fa-li"><i class="fas fa-code fa-2x red-text"></i></span>
+                                    <div>
+                                        <h5 class="font-weight-bold mb-3">Technology</h5>
+                                        <p class="text-muted">With cloud technology developed today, we can easily control the device with just a few taps.</p>
+                                    </div>
+                                </li>
+                                <li class="d-flex justify-content-center pl-4">
+                                    <span class="fa-li"><i class="far fa-money-bill-alt fa-2x deep-purple-text"></i></span>
+                                    <div>
+                                        <h5 class="font-weight-bold mb-3">Pricing</h5>
+                                        <p class="text-muted mb-0">The service is completely free in the first year and will be very preferential if you join us.</p>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                </div>
+                <!--Grid row-->
+
+            </div>
+            <!--Grid column-->
+
+        </section>
+        <!-- Section: Block Content -->
+
+    </div>
+
+    <div id="pricing" class="container pt-5 my-5 min-vh-100 d-flex align-items-center justify-content-center">
+
+        <!-- Section: Block Content -->
+        <section class="dark-grey-text">
+
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center align-items-center">
+
+                <!--Grid column-->
+                <div class="col-md-12">
+
+                    <h3 class="font-weight-bold text-center dark-grey-text pb-2">Our Pricing</h3>
+                    <hr class="w-header my-4">
+                    <p class="lead text-center text-muted pt-2 mb-5">
+                        We are starting with the project to integrate IoT devices and manage them.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-lg-4 mb-4 p-2">
+                            <div class="card text-center">
+                                <div class="card-header white">
+                                    <h4 class="h4 indigo-text my-2">Basic</h4>
+                                </div>
+                                <div>
+                                    <i class="far fa-paper-plane fa-4x indigo-text p-4"></i>
+                                    <h1 class="h1 indigo-text">Free</h1>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        We provide some free APIs to query and deal with your IoT devices.
+                                    </p>
+                                </div>
+                                <div class="card-footer white">
+                                    <a class="btn btn-outline-indigo btn-md" href="#" role="button">Choose Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4 p-2">
+                            <div class="card indigo text-center">
+                                <div class="card-header indigo">
+                                    <h4 class="h4 white-text my-2">Standard</h4>
+                                </div>
+                                <div>
+                                    <i class="fa fa-users fa-4x white-text p-4"></i>
+                                    <h1 class="h1 white-text">$10/months</h1>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text white-text">
+                                        We will provide cloud services to make log storage easier with unlimited storage and bandwidth. </p>
+                                </div>
+                                <div class="card-footer white">
+                                    <a class="btn btn-indigo btn-md" href="#" role="button">Choose Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4 p-2">
+                            <div class="card text-center">
+                                <div class="card-header white">
+                                    <h4 class="h4 indigo-text my-2">Professional</h4>
+                                </div>
+                                <div>
+                                    <i class="far fa-chart-bar fa-4x indigo-text p-4"></i>
+                                    <h1 class="h1 indigo-text">$69/months</h1>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        We will support consultancy and installation of IoT devices completely free and will be online 24/24.
+                                    </p>
+                                </div>
+                                <div class="card-footer white">
+                                    <a class="btn btn-outline-indigo btn-md" href="#" role="button">Choose Plan</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid column-->
+
+        </section>
+        <!-- Section: Block Content -->
+
+    </div>
+
+    <div id="team" class="container pt-5 my-5 min-vh-100 d-flex align-items-center justify-content-center">
+        <!--Section: Team-->
+        <section>
+
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center align-items-center">
+
+                <!--Grid column-->
+                <div class="col-md-12">
+
+                    <h3 class="font-weight-bold text-center dark-grey-text pb-2">Our Teams</h3>
+                    <hr class="w-header my-4">
+                    <p class="lead text-center text-muted pt-2 mb-5">
+                        We are a team of passionate technology people with extensive experience in software development.
+                    </p>
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="p-4">
+                                <div class="avatar w-100 white d-flex justify-content-center align-items-center">
+                                    <img src="assets/img/avatar/avatar-1.jpg" class="img-fluid rounded-circle z-depth-1" />
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h6 class="font-weight-bold pt-2">Nguyen Minh Giau</h6>
+                                    <p class="text-muted">
+                                        <small>
+                                  <i>Frontend / IoT Developer</i>
+                                </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 mb-4">
+                            <div class="p-4">
+                                <div class="avatar w-100 white d-flex justify-content-center align-items-center">
+                                    <img src="assets/img/avatar/avatar-2.jpg" class="img-fluid rounded-circle z-depth-1" />
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h6 class="font-weight-bold pt-2">Quan Kien Minh</h6>
+                                    <p class="text-muted">
+                                        <small>
+                                <i>Mobile / IoT / Backend Developer</i>
+                              </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="p-4">
+                                <div class="avatar w-100 white d-flex justify-content-center align-items-center">
+                                    <img src="assets/img/avatar/avatar-3.jpg" class="img-fluid rounded-circle z-depth-1" />
+                                </div>
+                                <div class="text-center mt-3">
+                                    <h6 class="font-weight-bold pt-2">Tieu Minh Khuong</h6>
+                                    <p class="text-muted">
+                                        <small>
+                                <i>Backend Developer / System Administrator</i>
+                              </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid column-->
+
+        </section>
+        <!--/.Section: Team-->
+    </div>
+</main>
+<!--Main layout-->
+
+<!-- Footer -->
+<footer class="page-footer font-small grey darken-4 py-4">
+
+    <!-- Footer Elements -->
+    <div class="container">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <!-- Content -->
+                    <h5 class="text-uppercase" id="logo">Enjo</h5>
+                    <p>An IoT's platform allow us combining multi-platform devices together.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Location</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a>Address: Building C, FPT University, D1 Street, High Technology Park, District 12, Ho Chi Minh City.</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-3 mb-md-0 mb-3">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Contact</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a>Number: 0707760614.</a>
+                        </li>
+                        <li>
+                            <a>Email: enjo@gmail.com</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <div class="row">
+            <div class="col-md-6 d-flex justify-content-start">
+                <!-- Copyright -->
+                <div class="footer-copyright text-center bg-transparent">© 2020 Copyright:
+                    <i class="fas fa-heart red-text mx-1"></i><a href="/landing"> Enjo</a>
+                </div>
+                <!-- Copyright -->
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <ul class="list-unstyled d-flex mb-0">
+                    <li>
+                        <a class="mr-3" role="button"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li>
+                        <a class="mr-3" role="button"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a class="mr-3" role="button"><i class="fab fa-instagram"></i></a>
+                    </li>
+                    <li>
+                        <a class="" role="button"><i class="fab fa-youtube"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer Elements -->
+
+</footer>
+<!-- Footer -->
